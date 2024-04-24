@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "u59QTzE6fSCKPcfiteh20M0Fn2hcczQXfFmiCjVGEHBDUl6M8yzda2sb/b6n0fo+eW5WHOyJvdZCuVA0oldYyA==",
+  "success": true,
+  "projectFilePath": "/home/runner/work/SuperSocket/SuperSocket/pkg/SuperSocket.csproj",
+  "expectedPackageFiles": [
+    "/home/runner/.nuget/packages/microsoft.build.tasks.git/1.0.0/microsoft.build.tasks.git.1.0.0.nupkg.sha512",
+    "/home/runner/.nuget/packages/microsoft.sourcelink.common/1.0.0/microsoft.sourcelink.common.1.0.0.nupkg.sha512",
+    "/home/runner/.nuget/packages/microsoft.sourcelink.github/1.0.0/microsoft.sourcelink.github.1.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}

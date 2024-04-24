@@ -1,0 +1,23 @@
+C:\Users\Huibert\OneDrive\Documenten2\USB2550HidTest\USB2550HidTest\UsbHid\bin\Release\UsbHid.dll
+C:\Users\Huibert\OneDrive\Documenten2\USB2550HidTest\USB2550HidTest\UsbHid\bin\Release\UsbHid.pdb
+C:\Users\Huibert\OneDrive\Documenten2\USB2550HidTest\USB2550HidTest\UsbHid\obj\Release\UsbHid.csprojResolveAssemblyReference.cache
+C:\Users\Huibert\OneDrive\Documenten2\USB2550HidTest\USB2550HidTest\UsbHid\obj\Release\UsbHid.USB.Classes.DeviceChangeNotifier.resources
+C:\Users\Huibert\OneDrive\Documenten2\USB2550HidTest\USB2550HidTest\UsbHid\obj\Release\UsbHid.csproj.GenerateResource.Cache
+C:\Users\Huibert\OneDrive\Documenten2\USB2550HidTest\USB2550HidTest\UsbHid\obj\Release\UsbHid.dll
+C:\Users\Huibert\OneDrive\Documenten2\USB2550HidTest\USB2550HidTest\UsbHid\obj\Release\UsbHid.pdb
+C:\Users\Tom\Desktop\Fietsopstelling\Atlas studenten\USB2550HidTest\USB2550HidTest\UsbHid\bin\Release\UsbHid.dll
+C:\Users\Tom\Desktop\Fietsopstelling\Atlas studenten\USB2550HidTest\USB2550HidTest\UsbHid\bin\Release\UsbHid.pdb
+C:\Users\Tom\Desktop\Fietsopstelling\Atlas studenten\USB2550HidTest\USB2550HidTest\UsbHid\obj\Release\UsbHid.csproj.AssemblyReference.cache
+C:\Users\Tom\Desktop\Fietsopstelling\Atlas studenten\USB2550HidTest\USB2550HidTest\UsbHid\obj\Release\UsbHid.USB.Classes.DeviceChangeNotifier.resources
+C:\Users\Tom\Desktop\Fietsopstelling\Atlas studenten\USB2550HidTest\USB2550HidTest\UsbHid\obj\Release\UsbHid.csproj.GenerateResource.cache
+C:\Users\Tom\Desktop\Fietsopstelling\Atlas studenten\USB2550HidTest\USB2550HidTest\UsbHid\obj\Release\UsbHid.csproj.CoreCompileInputs.cache
+C:\Users\Tom\Desktop\Fietsopstelling\Atlas studenten\USB2550HidTest\USB2550HidTest\UsbHid\obj\Release\UsbHid.dll
+C:\Users\Tom\Desktop\Fietsopstelling\Atlas studenten\USB2550HidTest\USB2550HidTest\UsbHid\obj\Release\UsbHid.pdb
+C:\Users\Tom\Desktop\MinimalController\USB2550HidTest\UsbHid\bin\Release\UsbHid.dll
+C:\Users\Tom\Desktop\MinimalController\USB2550HidTest\UsbHid\bin\Release\UsbHid.pdb
+C:\Users\Tom\Desktop\MinimalController\USB2550HidTest\UsbHid\obj\Release\UsbHid.csproj.AssemblyReference.cache
+C:\Users\Tom\Desktop\MinimalController\USB2550HidTest\UsbHid\obj\Release\UsbHid.USB.Classes.DeviceChangeNotifier.resources
+C:\Users\Tom\Desktop\MinimalController\USB2550HidTest\UsbHid\obj\Release\UsbHid.csproj.GenerateResource.cache
+C:\Users\Tom\Desktop\MinimalController\USB2550HidTest\UsbHid\obj\Release\UsbHid.csproj.CoreCompileInputs.cache
+C:\Users\Tom\Desktop\MinimalController\USB2550HidTest\UsbHid\obj\Release\UsbHid.dll
+C:\Users\Tom\Desktop\MinimalController\USB2550HidTest\UsbHid\obj\Release\UsbHid.pdb
