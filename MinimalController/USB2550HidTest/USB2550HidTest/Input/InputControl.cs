@@ -52,16 +52,10 @@ namespace USB2550HidTest.Input
             _serialport = new SerialPort();
             bool success = false;
 
-            string myPort = "COM5";
-
-            _serialport.PortName = myPort;
-            _serialport.BaudRate = 115200;
-            _serialport.Open();
-            success = true;
-            /*
-            for (int i = 5; i < 8; i++)
+            for (int i = 1; i < 8; i++)
             {
                 string portname = "COM" + i; // try all port combinations 1-7
+                Console.WriteLine("Trying to connect Arduino on " + portname);
                 try
                 {
                     _serialport.PortName = portname;
@@ -69,13 +63,15 @@ namespace USB2550HidTest.Input
                     _serialport.Open();
                     Console.WriteLine("Connected Arduino on " + portname);
                     success = true; //if it gets here it is a success
+                    break;
                 }
                 catch
                 {
+                    Console.WriteLine("Faield to connect Arduino on " + portname);
                     // do nothing, next loop will try again
                 }
             }
-            */
+
             if (!success) Console.WriteLine("Failure: Arduino not connected");
             return success;
         }
@@ -89,7 +85,6 @@ namespace USB2550HidTest.Input
                 {
                     int val = Convert.ToInt16(line);
                     bikeData[5] = val;
-                    
                 }
                 catch
                 {
@@ -104,7 +99,6 @@ namespace USB2550HidTest.Input
             Device.OnConnected += DeviceOnConnected;
             Device.OnDisConnected += DeviceOnDisConnected;
             Device.DataReceived += DeviceDataReceived;
-            
 
             Device.Connect();
         }
