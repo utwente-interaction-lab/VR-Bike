@@ -52,7 +52,7 @@ namespace USB2550HidTest.Input
             _serialport = new SerialPort();
             bool success = false;
 
-            for (int i = 1; i < 8; i++)
+            for (int i = 1; i < 99; i++)
             {
                 string portname = "COM" + i; // try all port combinations 1-7
                 Console.WriteLine("Trying to connect Arduino on " + portname);
