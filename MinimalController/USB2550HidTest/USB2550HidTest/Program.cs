@@ -9,28 +9,28 @@ namespace USB2550HidTest
         
         static void Main()
         {
+            // Used to send/receive data to/from the Unity project
             SocketServer server = new SocketServer();
-            //Console.WriteLine("startup!");
+
+            // Connects and starts reading the data from the Praxtour bike and the Arduino
             InputControl inputController = new InputControl();
-
-            //inputController.checkArduino();
-
-            //Console.WriteLine(inputController.getStringifiedData());
 
             inputController.setFrequency(1 / 60); // 60hz data rate (this is fine)
             while (true)
             {
-                //Console.WriteLine("Hello world!");
-                if (inputController.ArduinoConnected) inputController.checkArduino();
-                //Console.WriteLine("Hello world 2!");
+                //if (inputController.ArduinoConnected) inputController.checkArduino();
+
                 if (inputController.TimePassed())
                 {
-                    Console.WriteLine(inputController.getStringifiedData());
+
+                    if (inputController.ArduinoConnected) inputController.checkArduino();
+
                     server.sendData(inputController.getStringifiedData());
                    if (server.hasData())
                     {
-                   // handle data
-                       inputController.counterPressure(server.getData());
+                        Console.WriteLine("Received data from the SocketServer!");
+                        // send counter pressure to the bike from the websocket client (Unity Project)
+                        inputController.counterPressure(server.getData());
                    Console.WriteLine(server.getData());
                     }
                 }

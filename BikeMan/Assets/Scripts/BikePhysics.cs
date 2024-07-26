@@ -39,10 +39,12 @@ namespace Scripts
             if (keyboardInput) getManualControls();
             else if (bikesocket.hasMessage()) bikedata = bikesocket.parseData();
 
-            Debug.Log(bikedata[0]);
+            Debug.Log($"Received data: speed: {bikedata[0]};  left brake: {bikedata[1]}; right brake: {bikedata[2]}; gear: {bikedata[3]}; cadance: {bikedata[4]}; steering: {bikedata[5]}.");
 
+            // send back predefined resistance + resistance generated through braking
             int resistance = bike.move(bikedata);
-            //Debug.Log(resistance);
+
+            Debug.Log($"Sent resistance back to praxtour through WebSocket: {resistance}.");
             bikesocket.sendMessage("" + resistance);
 
             float spd = bike.getSpeed();
