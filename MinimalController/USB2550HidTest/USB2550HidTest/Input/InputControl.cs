@@ -10,6 +10,10 @@ using System.Diagnostics;
 
 namespace USB2550HidTest.Input
 {
+    /** InputControl contains the code to connect to the Arduino and the praxtour bike 
+     * and to collect the data from both devices at a predefined frequency. 
+     * TODO: fix left brake, then remove compensateForBrokenLeftBrake()
+     * **/
     class InputControl
     {
         public UsbHidDevice Device; //praxtour
@@ -17,7 +21,8 @@ namespace USB2550HidTest.Input
 
         //datafields: SPD LBR RBR GEAR CAD STR
         private int[] bikeData = { 0, 0, 0, 0, 0, 0};
-        //bike parameters:
+
+        //index of bike parameters in the data byte arrays from the praxtour bike:
         int speedADR = 3;
         int leftbrakeADR = 6;
         int rightbrakeADR = 7;
@@ -34,16 +39,17 @@ namespace USB2550HidTest.Input
 
         public bool ArduinoConnected = false;
 
-
         public InputControl()
         {
+            // Connect to the praxtour bike
             Console.WriteLine("Initializing praxtour...");
-            InitializeComponent();
-            Console.WriteLine("Successfull");
-
-            //Connect the arduino
+            InitializePraxtour();
+            Console.WriteLine("Successfully connected praxtour!");
+            
+            // Connect to Arduino
             Console.WriteLine("Connecting Arduino");
             ArduinoConnected = ConnectArduino();
+
             //for timing:
             stopwatch.Start();
         }
@@ -52,7 +58,7 @@ namespace USB2550HidTest.Input
             _serialport = new SerialPort();
             bool success = false;
 
-            for (int i = 1; i < 99; i++)
+            for (int i = 5; i < 99; i++)  //TODO: auto-detect the correct/real Arduino COM port
             {
                 string portname = "COM" + i; // try all port combinations 1-7
                 Console.WriteLine("Trying to connect Arduino on " + portname);
@@ -67,7 +73,7 @@ namespace USB2550HidTest.Input
                 }
                 catch
                 {
-                    Console.WriteLine("Faield to connect Arduino on " + portname);
+                    Console.WriteLine("Failed to connect Arduino on " + portname);
                     // do nothing, next loop will try again
                 }
             }
@@ -76,6 +82,7 @@ namespace USB2550HidTest.Input
             return success;
         }
         
+        // Read the steering rotation from the Arduino
         public void checkArduino()
         {
             string line = _serialport.ReadLine();
@@ -88,12 +95,11 @@ namespace USB2550HidTest.Input
                 }
                 catch
                 {
-                    Console.WriteLine("An error occured reading data...");
+                    Console.WriteLine("An error occured reading data from the Arduino...");
                 }
-                //Console.WriteLine(bikeData[5]);
             }
         }
-        private void InitializeComponent()
+        private void InitializePraxtour()
         {
             Device = new UsbHidDevice(0x1f34, 0x1000, 0);
             Device.OnConnected += DeviceOnConnected;
@@ -102,17 +108,21 @@ namespace USB2550HidTest.Input
 
             Device.Connect();
         }
-        public int[] getData()
-        { 
-            return bikeData;
-        }
+
         public void setFrequency(float fraction)
         {
             timeStop = Convert.ToInt64(1000 * fraction);
         }
+
         public string getStringifiedData()
         {
-            // 0: speed 1: left brake 2: right brake 3: gear 4: cadance 5: steeringwheel
+            // 0: speed
+            // 1: left brake
+            // 2: right brake
+            // 3: gear
+            // 4: cadance
+            // 5: steering
+
             string outdata = "";
             outdata += bikeData[0];
             outdata += ",";
@@ -125,15 +135,15 @@ namespace USB2550HidTest.Input
             outdata += bikeData[4];
             outdata += ",";
             outdata += bikeData[5];
-            //Console.WriteLine(bikeData[5]);
-            //Console.WriteLine(outdata);
+
+            Console.WriteLine(outdata);
             return outdata;
-            //return "hello this is a test";
         }
         
         public void counterPressure(string data)
         {
             int pct = Convert.ToInt16(data);
+            Console.WriteLine("Sending counter pressure to praxtour bike:");
             Console.WriteLine(data);
             if (pct > 100) pct = 100; //limit to 100
             var command = new CommandMessage(0, new byte[] { Convert.ToByte(pct), 0, 0, 0, 0, 0, 0, 0 });
@@ -156,16 +166,19 @@ namespace USB2550HidTest.Input
         {
             Console.WriteLine("bike disconnected");
         }
+
+        // Extract the bike parameters from the received byte array, excluding steering rotation (which is read from the Arduino).
         private void DeviceDataReceived(byte[] data)
         {
             int[] praxTour = ByteArrayToData(data);
-            for(int i = 0; i < 5; i++)
-            {
-                Console.Write(praxTour[i] +", ");
-                bikeData[i] = praxTour[i];
-            }
-            //Console.WriteLine("");
+            for(int i = 0; i < 5; i++) { bikeData[i] = praxTour[i]; }
+
+            // Double the intensity of the right brake to compensate for the unfunctional left brake
+            // TODO: remove this function when left brake is fixed
+            compensateForBrokenLeftBrake();
         }
+
+        // Get each bike parameter from the data byte array using their predefined index within the array
         private int[] ByteArrayToData(byte[] data)
         {
 
@@ -179,6 +192,14 @@ namespace USB2550HidTest.Input
                 res[4] = Convert.ToInt16(data[cadanceADR]);
             }
             return res;
+        }
+
+        public void compensateForBrokenLeftBrake()
+        {
+            // left brake intensity
+            bikeData[1] = 0;
+            // right brake intensity
+            bikeData[2] *= 2;
         }
     }
 }
