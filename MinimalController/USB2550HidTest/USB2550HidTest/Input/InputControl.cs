@@ -56,7 +56,7 @@ namespace USB2550HidTest.Input
             _serialport = new SerialPort();
             bool success = false;
 
-            string portname = AutodetectArduinoPort;
+            string portname = AutodetectArduinoPort; // Manually write the serial port name for the Arduino if this method fails (e.g. COM3)
             Console.WriteLine("Trying to connect Arduino on " + portname);
 
             if (portname != null)
@@ -94,6 +94,8 @@ namespace USB2550HidTest.Input
                         string desc = item["Description"].ToString();
                         string deviceId = item["DeviceID"].ToString();
 
+                        Console.WriteLine("ManagementObject item: " + desc);
+
                         if (desc.Contains("Arduino"))
                         {
                             Console.WriteLine("Arduino detected on " + deviceId);
@@ -103,7 +105,7 @@ namespace USB2550HidTest.Input
                 }
                 catch (ManagementException e)
                 {
-                    /* Do Nothing */
+                    Console.WriteLine("No Arduino has been detected");
                 }
 
                 return null;
