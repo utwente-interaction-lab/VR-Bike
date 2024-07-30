@@ -6,7 +6,7 @@ namespace USB2550HidTest
     static class Program
     {
         [STAThread]
-        
+
         static void Main()
         {
             // Used to send/receive data to/from the Unity project
@@ -26,17 +26,17 @@ namespace USB2550HidTest
                     if (inputController.ArduinoConnected) inputController.checkArduino();
 
                     server.sendData(inputController.getStringifiedData());
-                   if (server.hasData())
+                    if (server.hasData())
                     {
                         Console.WriteLine("Received data from the SocketServer!");
                         // send counter pressure to the bike from the websocket client (Unity Project)
                         inputController.counterPressure(server.getData());
-                   Console.WriteLine(server.getData());
+                        Console.WriteLine(server.getData());
                     }
                 }
             }
         }
     }
-        
+
 }
 
